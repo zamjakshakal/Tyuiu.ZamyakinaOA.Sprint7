@@ -40,6 +40,8 @@
             ButtonLoad_ZOA = new Button();
             ButtonCancel_ZOA = new Button();
             ButtonDiagram_ZOA = new Button();
+            buttonCancelFind_ZOA = new Button();
+            buttonCancelFiltr_ZOA = new Button();
             PanelMainButtons_ZOA = new Panel();
             GroupBoxDataBase_ZOA = new GroupBox();
             dataGridViewDataBase_ZOA = new DataGridView();
@@ -193,6 +195,38 @@
             ToolTipForButtonAbout_ZOA.SetToolTip(ButtonDiagram_ZOA, "Нажмите, чтобы получить информацию о программе!");
             ButtonDiagram_ZOA.UseVisualStyleBackColor = false;
             // 
+            // buttonCancelFind_ZOA
+            // 
+            buttonCancelFind_ZOA.BackColor = Color.FromArgb(255, 214, 237);
+            buttonCancelFind_ZOA.BackgroundImage = Properties.Resources.cancel;
+            buttonCancelFind_ZOA.BackgroundImageLayout = ImageLayout.Stretch;
+            buttonCancelFind_ZOA.Cursor = Cursors.Hand;
+            buttonCancelFind_ZOA.FlatStyle = FlatStyle.Flat;
+            buttonCancelFind_ZOA.ForeColor = Color.FromArgb(237, 151, 194);
+            buttonCancelFind_ZOA.Location = new Point(220, 53);
+            buttonCancelFind_ZOA.Name = "buttonCancelFind_ZOA";
+            buttonCancelFind_ZOA.Size = new Size(30, 27);
+            buttonCancelFind_ZOA.TabIndex = 4;
+            ToolTipForButtonAbout_ZOA.SetToolTip(buttonCancelFind_ZOA, "Нажмите, чтобы получить информацию о программе!");
+            buttonCancelFind_ZOA.UseVisualStyleBackColor = false;
+            buttonCancelFind_ZOA.Click += buttonCancelFind_ZOA_Click;
+            // 
+            // buttonCancelFiltr_ZOA
+            // 
+            buttonCancelFiltr_ZOA.BackColor = Color.FromArgb(255, 214, 237);
+            buttonCancelFiltr_ZOA.BackgroundImage = Properties.Resources.cancel;
+            buttonCancelFiltr_ZOA.BackgroundImageLayout = ImageLayout.Stretch;
+            buttonCancelFiltr_ZOA.Cursor = Cursors.Hand;
+            buttonCancelFiltr_ZOA.FlatStyle = FlatStyle.Flat;
+            buttonCancelFiltr_ZOA.ForeColor = Color.FromArgb(237, 151, 194);
+            buttonCancelFiltr_ZOA.Location = new Point(220, 115);
+            buttonCancelFiltr_ZOA.Name = "buttonCancelFiltr_ZOA";
+            buttonCancelFiltr_ZOA.Size = new Size(30, 27);
+            buttonCancelFiltr_ZOA.TabIndex = 5;
+            ToolTipForButtonAbout_ZOA.SetToolTip(buttonCancelFiltr_ZOA, "Нажмите, чтобы получить информацию о программе!");
+            buttonCancelFiltr_ZOA.UseVisualStyleBackColor = false;
+            buttonCancelFiltr_ZOA.Click += buttonCancelFiltr_ZOA_Click;
+            // 
             // PanelMainButtons_ZOA
             // 
             PanelMainButtons_ZOA.BackColor = Color.Transparent;
@@ -214,7 +248,7 @@
             // GroupBoxDataBase_ZOA
             // 
             GroupBoxDataBase_ZOA.Controls.Add(dataGridViewDataBase_ZOA);
-            GroupBoxDataBase_ZOA.Font = new Font("Sitka Small", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
+            GroupBoxDataBase_ZOA.Font = new Font("Arial", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 204);
             GroupBoxDataBase_ZOA.Location = new Point(5, 86);
             GroupBoxDataBase_ZOA.Name = "GroupBoxDataBase_ZOA";
             GroupBoxDataBase_ZOA.Size = new Size(789, 670);
@@ -231,15 +265,17 @@
             dataGridViewDataBase_ZOA.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewDataBase_ZOA.Dock = DockStyle.Fill;
             dataGridViewDataBase_ZOA.GridColor = Color.RosyBrown;
-            dataGridViewDataBase_ZOA.Location = new Point(3, 20);
+            dataGridViewDataBase_ZOA.Location = new Point(3, 18);
             dataGridViewDataBase_ZOA.Name = "dataGridViewDataBase_ZOA";
             dataGridViewDataBase_ZOA.RowHeadersVisible = false;
-            dataGridViewDataBase_ZOA.Size = new Size(783, 647);
+            dataGridViewDataBase_ZOA.Size = new Size(783, 649);
             dataGridViewDataBase_ZOA.TabIndex = 0;
             dataGridViewDataBase_ZOA.SortCompare += dataGridViewDataBase_ZOA_SortCompare;
             // 
             // GroupBoxSearch_ZOA
             // 
+            GroupBoxSearch_ZOA.Controls.Add(buttonCancelFiltr_ZOA);
+            GroupBoxSearch_ZOA.Controls.Add(buttonCancelFind_ZOA);
             GroupBoxSearch_ZOA.Controls.Add(ButtonFiltr_ZOA);
             GroupBoxSearch_ZOA.Controls.Add(TextBoxFiltr_ZOA);
             GroupBoxSearch_ZOA.Controls.Add(ButtonFind_ZOA);
@@ -327,7 +363,6 @@
             // 
             TextBoxAvg_ZOA.Location = new Point(141, 101);
             TextBoxAvg_ZOA.Name = "TextBoxAvg_ZOA";
-            TextBoxAvg_ZOA.ReadOnly = true;
             TextBoxAvg_ZOA.Size = new Size(130, 22);
             TextBoxAvg_ZOA.TabIndex = 5;
             TextBoxAvg_ZOA.TextAlign = HorizontalAlignment.Center;
@@ -345,7 +380,6 @@
             // 
             TextBoxMax_ZOA.Location = new Point(141, 63);
             TextBoxMax_ZOA.Name = "TextBoxMax_ZOA";
-            TextBoxMax_ZOA.ReadOnly = true;
             TextBoxMax_ZOA.Size = new Size(130, 22);
             TextBoxMax_ZOA.TabIndex = 3;
             TextBoxMax_ZOA.TextAlign = HorizontalAlignment.Center;
@@ -354,7 +388,6 @@
             // 
             TextBoxMin_ZOA.Location = new Point(141, 30);
             TextBoxMin_ZOA.Name = "TextBoxMin_ZOA";
-            TextBoxMin_ZOA.ReadOnly = true;
             TextBoxMin_ZOA.Size = new Size(130, 22);
             TextBoxMin_ZOA.TabIndex = 2;
             TextBoxMin_ZOA.TextAlign = HorizontalAlignment.Center;
@@ -498,5 +531,7 @@
         private DataGridView dataGridViewDataBase_ZOA;
         private OpenFileDialog openFileDialog_ZOA;
         private SaveFileDialog saveFileDialog_ZOA;
+        private Button buttonCancelFind_ZOA;
+        private Button buttonCancelFiltr_ZOA;
     }
 }

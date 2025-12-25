@@ -52,6 +52,8 @@ namespace Tyuiu.ZamyakinaOA.Sprint7.V1
             LabelMin_ZOA.Visible = false;
             LabelMax_ZOA.Visible = false;
             LabelAvg_ZOA.Visible = false;
+            buttonCancelFind_ZOA.Visible = false;
+            buttonCancelFiltr_ZOA.Visible = false;
         }
         // Изначальный вид кнопок без загруженного файла
 
@@ -165,6 +167,8 @@ namespace Tyuiu.ZamyakinaOA.Sprint7.V1
             LabelMin_ZOA.Visible = true;
             LabelMax_ZOA.Visible = true;
             LabelAvg_ZOA.Visible = true;
+            buttonCancelFind_ZOA.Visible = true;
+            buttonCancelFiltr_ZOA.Visible = true;
         }
         // Окрытие csv-файла
 
@@ -280,6 +284,8 @@ namespace Tyuiu.ZamyakinaOA.Sprint7.V1
             LabelMin_ZOA.Visible = false;
             LabelMax_ZOA.Visible = false;
             LabelAvg_ZOA.Visible = false;
+            buttonCancelFind_ZOA.Visible = false;
+            buttonCancelFiltr_ZOA.Visible = false;
         }
         // Удаление файла
 
@@ -348,25 +354,38 @@ namespace Tyuiu.ZamyakinaOA.Sprint7.V1
         // Счет минимального, максимамльного и среднего значений
         private void ButtonCalculate_ZOA_Click(object sender, EventArgs e)
         {
+            int columnIndex = 4; // пятый столбец
 
-            DataService ds = new DataService();
-            try
+            double min = double.MaxValue;
+            double max = double.MinValue;
+            double sum = 0;
+            int count = 0;
+
+            foreach (DataGridViewRow row in dataGridViewDataBase_ZOA.Rows)
             {
-                int[] PowerCol = new int[rows - 1];
-                int k = 1;
-                for (int i = 0; i < PowerCol.Length; i++)
+                if (row.IsNewRow)
+                    continue;
+
+                var cellValue = row.Cells[columnIndex].Value;
+                if (cellValue == null)
+                    continue;
+
+                if (double.TryParse(cellValue.ToString().Trim(), out double value))
                 {
-                    PowerCol[i] = Convert.ToInt32(dataGridViewDataBase_ZOA.Rows[k].Cells[5].Value.ToString());
-                    k++;
+                    if (value < min) min = value;
+                    if (value > max) max = value;
+
+                    sum += value;
+                    count++;
                 }
-                TextBoxMax_ZOA.Text = ds.GetMaxValue(PowerCol).ToString();
-                TextBoxMin_ZOA.Text = ds.GetMinValue(PowerCol).ToString();
-                TextBoxAvg_ZOA.Text = ds.GetAvgValue(PowerCol).ToString();
             }
-            catch
-            {
-                MessageBox.Show("Что-то пошло не так", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+
+            if (count == 0)
+                return;
+
+            TextBoxMin_ZOA.Text = min.ToString();
+            TextBoxMax_ZOA.Text = max.ToString();
+            TextBoxAvg_ZOA.Text = (sum / count).ToString();
         }
         // Счет минимального, максимамльного и среднего значений
 
@@ -473,5 +492,29 @@ namespace Tyuiu.ZamyakinaOA.Sprint7.V1
             }
         }
         // сортирровка
+
+
+        // отмена поиска
+        private void buttonCancelFind_ZOA_Click(object sender, EventArgs e)
+        {
+            TextBoxSearch_ZOA.Text = null;
+            for (int i = 0; i < rows; i++)
+            {
+                for (int j = 0; j < column; j++)
+                {
+                    dataGridViewDataBase_ZOA.Rows[i].Cells[j].Style.BackColor = Color.White;
+                }
+            }
+        }
+        // отмена поиска
+
+
+        // отмена фильтра
+        private void buttonCancelFiltr_ZOA_Click(object sender, EventArgs e)
+        {
+            dataGridViewDataBase_ZOA.ClearSelection();
+            TextBoxFiltr_ZOA.Text = null;
+        }
+        // отмена фильтра
     }
 }
